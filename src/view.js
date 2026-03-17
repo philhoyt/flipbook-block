@@ -117,21 +117,61 @@ document.addEventListener( 'DOMContentLoaded', async function () {
 
 		loadingEl.remove();
 
-		// Show first/last pages as single-page covers when they are portrait
-		// pages inside a spread PDF (i.e. a real cover and back cover).
-		const showCover = layoutMode === 'spread' && page1Viewport.height > page1Viewport.width;
+		// In spread PDFs the first and last pages are portrait covers.
+		// showCover:true tells StPageFlip to display them as single half-pages,
+		// but it still draws an edge shadow on the empty side.
+		// We cover that area with a positioned overlay div that matches the
+		// container background, then hide it once interior spreads are visible.
+		const hasCoverPages = layoutMode === 'spread' && page1Viewport.height > page1Viewport.width;
 
 		const pageFlip = new PageFlip( container, {
 			width:               pageWidth,
 			height:              pageHeight,
 			size:                'fixed',
-			showCover,
+			showCover:           hasCoverPages,
 			drawShadow:          true,
 			maxShadowOpacity:    0.3,
 			flippingTime:        800,
 			usePortrait:         true,
 			mobileScrollSupport: true,
 		} );
+
+		// Overlay that hides the edge shadow on the empty side of cover pages.
+		// Hidden during flip animations so it doesn't clip the turning page,
+		// then restored once the book settles (changeState → 'read').
+		if ( hasCoverPages ) {
+			const overlay = document.createElement( 'div' );
+			overlay.style.cssText =
+				'position:absolute;top:0;height:100%;width:50%;pointer-events:none;z-index:5;' +
+				'background:' + getComputedStyle( container ).backgroundColor + ';';
+			container.appendChild( overlay );
+
+			let currentPage = 0;
+
+			const positionOverlay = ( idx ) => {
+				if ( idx === 0 ) {
+					Object.assign( overlay.style, { display: 'block', left: '0', right: 'auto' } );
+				} else if ( idx === images.length - 1 ) {
+					Object.assign( overlay.style, { display: 'block', left: 'auto', right: '0' } );
+				} else {
+					overlay.style.display = 'none';
+				}
+			};
+
+			// Track the settled page index via flip events.
+			pageFlip.on( 'flip', ( e ) => { currentPage = e.data; } );
+
+			// Hide overlay while the page is in motion; restore when settled.
+			pageFlip.on( 'changeState', ( e ) => {
+				if ( e.data === 'flipping' || e.data === 'user_fold' ) {
+					overlay.style.display = 'none';
+				} else if ( e.data === 'read' ) {
+					positionOverlay( currentPage );
+				}
+			} );
+
+			positionOverlay( 0 );
+		}
 
 		// Block the corner-fold hover preview while keeping drag and click.
 		// Listeners fire in registration order on the same element, so this must
