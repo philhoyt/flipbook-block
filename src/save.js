@@ -5,7 +5,7 @@ export default function save( { attributes } ) {
 
 	return (
 		<div { ...useBlockProps.save() }>
-			<div id={ `flipbook-container-${blockId}` } data-pdf-url={ pdfUrl }></div>
+			<div id={ `flipbook-container-${ blockId }` } data-pdf-url={ pdfUrl }></div>
 		</div>
 	);
 }

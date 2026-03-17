@@ -37,7 +37,7 @@ const Edit = ( { attributes, setAttributes, clientId } ) => {
 						/>
 					</MediaUploadCheck>
 				</PanelBody>
-			</InspectorControls>
+</InspectorControls>
 
 			<div { ...blockProps }>
 				{ pdfUrl ? (

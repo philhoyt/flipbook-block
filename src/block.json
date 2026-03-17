@@ -12,7 +12,7 @@
             "selector": "div[data-pdf-url]",
             "attribute": "data-pdf-url"
         },
-        "blockId": {
+"blockId": {
             "type": "string"
         }
     },
