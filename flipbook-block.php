@@ -32,7 +32,7 @@ add_action( 'init', __NAMESPACE__ . '\\register_flipbook_block' );
  */
 function enqueue_flipbook_assets() {
 	if ( has_block( 'ph/flipbook-block' ) ) {
-		$pdfjs_path = plugin_dir_path( __FILE__ ) . 'assets/js/libs/pdf.min.js';
+		$pdfjs_path    = plugin_dir_path( __FILE__ ) . 'assets/js/libs/pdf.min.js';
 		$pdfjs_version = file_exists( $pdfjs_path ) ? filemtime( $pdfjs_path ) : false;
 
 		wp_enqueue_script(
