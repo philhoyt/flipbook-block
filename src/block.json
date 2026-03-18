@@ -14,14 +14,51 @@
         },
         "blockId": {
             "type": "string"
+        },
+        "pdfId": {
+            "type": "number"
+        },
+        "toolbar": {
+            "type": "boolean",
+            "default": true
+        },
+        "toolbarAlwaysVisible": {
+            "type": "boolean",
+            "default": true
+        },
+        "enableFullscreen": {
+            "type": "boolean",
+            "default": true
+        },
+        "enableDownload": {
+            "type": "boolean",
+            "default": false
+        },
+        "downloadFilename": {
+            "type": "string",
+            "default": ""
+        },
+"singlePageMode": {
+            "type": "boolean",
+            "default": false
+        },
+        "flipDuration": {
+            "type": "number",
+            "default": 800
+        },
+        "startPage": {
+            "type": "number",
+            "default": 1
         }
     },
     "supports": {
-        "html": false
+        "html": false,
+        "align": [ "wide", "full" ]
     },
     "textdomain": "flipbook-block",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",
-    "viewScript": "file:./view.js"
+    "viewScript": "file:./view.js",
+    "viewStyle": "file:./view.css"
 }

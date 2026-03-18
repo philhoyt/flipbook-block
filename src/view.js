@@ -1,22 +1,30 @@
-jQuery(document).ready(function ($) {
-	// Loop through each flipbook container on the page
-	$('[id^="flipbook-container-"]').each(function() {
-		// Get the PDF URL and block ID from the current container
-		var pdfUrl = $(this).data('pdf-url');
-		var blockId = $(this).attr('id');
-
-		// Define flipbook options
-		var options = {
-			scrollWheel: false,
-			soundEnable: false,
-			backgroundColor: 'transparent',
-			// Add any additional flipbook options here
-		};
-		
-		// Check if the PDF URL is available before initializing the flipbook
-		if (pdfUrl) {
-			// Initialize the flipbook for this specific container
-			$(`#${blockId}`).flipBook(pdfUrl, options);
+import PageFlipOpen from 'pageflipopen';
+import 'pageflipopen/pageflipopen.css';
+document.addEventListener( 'DOMContentLoaded', function () {
+	document.querySelectorAll( '[id^="flipbook-container-"]' ).forEach( function ( container ) {
+		var pdfUrl = container.dataset.pdfUrl;
+		if ( ! pdfUrl ) {
+			return;
 		}
-	});
-});
+
+		var dataset = container.dataset;
+
+		var options = {
+			source: pdfUrl,
+			backgroundColor: 'transparent',
+			toolbar: dataset.toolbar !== 'false',
+			toolbarAlwaysVisible: dataset.toolbarAlwaysVisible === 'true',
+			enableFullscreen: dataset.enableFullscreen !== 'false',
+			enableDownload: dataset.enableDownload === 'true',
+			singlePageMode: dataset.singlePageMode === 'true',
+			flipDuration: parseInt( dataset.flipDuration, 10 ) || 800,
+			startPage: parseInt( dataset.startPage, 10 ) || 1,
+		};
+
+		if ( dataset.downloadFilename ) {
+			options.downloadFilename = dataset.downloadFilename;
+		}
+
+		new PageFlipOpen( container, options );
+	} );
+} );
