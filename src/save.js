@@ -9,9 +9,10 @@ export default function save( { attributes } ) {
 		enableFullscreen,
 		enableDownload,
 		downloadFilename,
-singlePageMode,
+		singlePageMode,
 		flipDuration,
 		startPage,
+		height,
 	} = attributes;
 
 	return (
@@ -27,6 +28,7 @@ singlePageMode,
 				data-single-page-mode={ singlePageMode }
 				data-flip-duration={ flipDuration }
 				data-start-page={ startPage }
+				style={ { height } }
 			></div>
 		</div>
 	);

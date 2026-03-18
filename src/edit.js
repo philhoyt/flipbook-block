@@ -1,6 +1,19 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, MediaPlaceholder, MediaReplaceFlow, BlockControls, InspectorControls } from '@wordpress/block-editor';
-import { ToolbarGroup, PanelBody, ToggleControl, RangeControl, TextControl } from '@wordpress/components';
+import {
+	useBlockProps,
+	MediaPlaceholder,
+	MediaReplaceFlow,
+	BlockControls,
+	InspectorControls,
+} from '@wordpress/block-editor';
+import {
+	ToolbarGroup,
+	PanelBody,
+	ToggleControl,
+	RangeControl,
+	TextControl,
+	__experimentalUnitControl as UnitControl, // eslint-disable-line @wordpress/no-unsafe-wp-apis
+} from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
@@ -17,9 +30,10 @@ const Edit = ( { attributes, setAttributes, clientId } ) => {
 		enableFullscreen,
 		enableDownload,
 		downloadFilename,
-singlePageMode,
+		singlePageMode,
 		flipDuration,
 		startPage,
+		height,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -28,6 +42,9 @@ singlePageMode,
 		if ( ! blockId ) {
 			setAttributes( { blockId: clientId } );
 		}
+		// blockId and setAttributes are intentionally omitted — this only needs
+		// to run once to set a stable ID from clientId.
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ clientId ] );
 
 	const media = useSelect(
@@ -50,45 +67,71 @@ singlePageMode,
 					<ToggleControl
 						label={ __( 'Show toolbar', 'flipbook-block' ) }
 						checked={ toolbar }
-						onChange={ ( value ) => setAttributes( { toolbar: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { toolbar: value } )
+						}
 					/>
 					<ToggleControl
 						label={ __( 'Always visible', 'flipbook-block' ) }
 						checked={ toolbarAlwaysVisible }
-						onChange={ ( value ) => setAttributes( { toolbarAlwaysVisible: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { toolbarAlwaysVisible: value } )
+						}
 						disabled={ ! toolbar }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Features', 'flipbook-block' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Features', 'flipbook-block' ) }
+					initialOpen={ false }
+				>
 					<ToggleControl
 						label={ __( 'Fullscreen button', 'flipbook-block' ) }
 						checked={ enableFullscreen }
-						onChange={ ( value ) => setAttributes( { enableFullscreen: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { enableFullscreen: value } )
+						}
 					/>
 					<ToggleControl
 						label={ __( 'Download button', 'flipbook-block' ) }
 						checked={ enableDownload }
-						onChange={ ( value ) => setAttributes( { enableDownload: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { enableDownload: value } )
+						}
 					/>
 					{ enableDownload && (
 						<TextControl
-							label={ __( 'Download filename', 'flipbook-block' ) }
+							label={ __(
+								'Download filename',
+								'flipbook-block'
+							) }
 							value={ downloadFilename }
-							placeholder={ __( 'Defaults to PDF filename', 'flipbook-block' ) }
-							onChange={ ( value ) => setAttributes( { downloadFilename: value } ) }
+							placeholder={ __(
+								'Defaults to PDF filename',
+								'flipbook-block'
+							) }
+							onChange={ ( value ) =>
+								setAttributes( { downloadFilename: value } )
+							}
 						/>
 					) }
 				</PanelBody>
-				<PanelBody title={ __( 'Display', 'flipbook-block' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Display', 'flipbook-block' ) }
+					initialOpen={ false }
+				>
 					<ToggleControl
 						label={ __( 'Single page mode', 'flipbook-block' ) }
 						checked={ singlePageMode }
-						onChange={ ( value ) => setAttributes( { singlePageMode: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { singlePageMode: value } )
+						}
 					/>
 					<RangeControl
 						label={ __( 'Flip duration (ms)', 'flipbook-block' ) }
 						value={ flipDuration }
-						onChange={ ( value ) => setAttributes( { flipDuration: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { flipDuration: value } )
+						}
 						min={ 0 }
 						max={ 3000 }
 						step={ 100 }
@@ -96,9 +139,25 @@ singlePageMode,
 					<RangeControl
 						label={ __( 'Start page', 'flipbook-block' ) }
 						value={ startPage }
-						onChange={ ( value ) => setAttributes( { startPage: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { startPage: value } )
+						}
 						min={ 1 }
 						max={ 999 }
+					/>
+					<UnitControl
+						label={ __( 'Height', 'flipbook-block' ) }
+						value={ height }
+						onChange={ ( value ) =>
+							setAttributes( { height: value } )
+						}
+						units={ [
+							{ value: 'px', label: 'px' },
+							{ value: 'vh', label: 'vh' },
+							{ value: '%', label: '%' },
+							{ value: 'em', label: 'em' },
+							{ value: 'rem', label: 'rem' },
+						] }
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -136,7 +195,10 @@ singlePageMode,
 						icon="media-document"
 						labels={ {
 							title: __( 'Flipbook PDF', 'flipbook-block' ),
-							instructions: __( 'Upload a PDF file to display as an interactive flipbook.', 'flipbook-block' ),
+							instructions: __(
+								'Upload a PDF file to display as an interactive flipbook.',
+								'flipbook-block'
+							),
 						} }
 						onSelect={ onSelectPDF }
 						allowedTypes={ ALLOWED_TYPES }

@@ -1,5 +1,6 @@
 .wp-block-ph-flipbook-block {
+
 	[id^="flipbook-container-"] {
-		height: 100vh;
+		min-height: 80vh;
 	}
 }

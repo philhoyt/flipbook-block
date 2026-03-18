@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="Flipbook Block">
+    <description>PHP CodeSniffer rules for Flipbook Block plugin.</description>
+
+    <file>flipbook-block.php</file>
+
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <config name="minimum_supported_wp_version" value="6.6"/>
+    <config name="testVersion" value="7.0-"/>
+
+    <rule ref="WordPress"/>
+</ruleset>
