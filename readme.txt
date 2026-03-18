@@ -1,59 +1,80 @@
 === Flipbook Block ===
-Contributors:      Phil Hoyt
-Tags:              block, flipbook, PDF, block-editor
-Tested up to:      6.6
-Stable tag:        0.1.0
-License:           GPL-2.0-or-later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Contributors: philhoyt
+Tags: block, flipbook, pdf, page-flip, viewer
+Requires at least: 6.6
+Tested up to: 6.7
+Stable tag: 1.0.0
+Requires PHP: 7.0
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Display a PDF in a digital flipbook format using the Gutenberg block editor.
+Display a PDF as an interactive digital flipbook using the WordPress block editor.
 
 == Description ==
 
-The **Flipbook Block** is a WordPress Gutenberg block that allows you to display PDFs as a digital flipbook on the front end of your WordPress site. Using the block editor, users can easily upload a PDF and display it in an interactive flipbook format for better user engagement.
+Flipbook Block lets you upload any PDF from your media library and display it as a beautiful, interactive digital flipbook with realistic page-turn animations.
 
-This plugin uses the **pdf-flipbook** library created by **HiIamChaitanya** for the flipbook functionality. You can view the original project here: [pdf-flipbook on GitHub](https://github.com/HiIamChaitanya/pdf-flipbook/tree/main?tab=readme-ov-file).
+Powered by PageFlipOpen, the flipbook renders entirely in the browser with no external services required.
 
-### Features:
-- Upload a PDF file and display it as a flipbook.
-- Easy-to-use interface with the WordPress block editor.
+Features:
+
+* Upload PDFs directly from the WordPress media library
+* Interactive page-flip animations
+* Configurable toolbar with fullscreen and download options
+* Auto-detects single or double page spread based on container width
+* Adjustable height, animation speed, and start page
+* Wide and full alignment support
+* PDF thumbnail preview in the block editor
 
 == Installation ==
 
-To install the Flipbook Block plugin, follow these steps:
+1. Upload the flipbook-block folder to the /wp-content/plugins/ directory, or install the plugin through the WordPress Plugins screen.
+2. Activate the plugin through the Plugins menu in WordPress.
+3. In the block editor, add the Flipbook Block block to any post or page.
+4. Upload or select a PDF from your media library.
 
-1. Upload the plugin files to the `/wp-content/plugins/flipbook-block` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. In the block editor, search for the "Flipbook Block" to upload your PDF and display it on your page or post.
+== Block Settings ==
+
+= Toolbar =
+* Show toolbar - Display the flipbook toolbar. Default: on.
+* Always visible - Keep the toolbar permanently visible instead of fading out. Default: on.
+
+= Features =
+* Fullscreen button - Show a fullscreen toggle button in the toolbar. Default: on.
+* Download button - Show a download button in the toolbar. Default: off.
+* Download filename - Custom filename for the downloaded PDF (only shown when download is enabled).
+
+= Display =
+* Single page mode - Force single-page layout instead of auto-detecting based on container width. Default: off.
+* Flip duration - Page-turn animation speed in milliseconds. Default: 800.
+* Start page - The page number to open on. Default: 1.
+* Height - Height of the flipbook container. Supports px, vh, %, em, and rem. Default: 100vh.
 
 == Frequently Asked Questions ==
 
-= How can I upload a PDF and display it as a flipbook? =
+= What file types are supported? =
 
-Simply add the "Flipbook Block" in the block editor, then click on the "Upload PDF" button to upload your file. Once uploaded, the flipbook will appear on the front end.
+Only PDF files are supported.
 
-= Can I customize the flipbook appearance? =
+= Why isn't the PDF thumbnail showing in the editor? =
 
-The plugin uses the **pdf-flipbook** library, which includes a variety of options for customizing the display. At the moment, the plugin focuses on simplicity, but future updates may include more customization options.
+WordPress generates PDF thumbnails using Imagick. If Imagick is not installed on your server, the thumbnail will not appear in the editor. The flipbook will still work correctly on the frontend.
 
-= What is the library used for the flipbook functionality? =
+= The flipbook isn't rendering on my site. What should I check? =
 
-This plugin integrates the **pdf-flipbook** library by **HiIamChaitanya**. You can check out the original project on GitHub: https://github.com/HiIamChaitanya/pdf-flipbook/tree/main?tab=readme-ov-file.
-
-== Screenshots ==
-
-1. The Flipbook Block in the block editor.
-2. A sample flipbook displayed on the front end.
+Make sure your server is configured to serve .js files with the correct MIME type (application/javascript). If you are seeing a "fake worker" warning in the browser console, this is likely the cause.
 
 == Changelog ==
 
-= 0.1.0 =
-* Initial release.
+= 1.0.0 =
+* Initial release
+* PDF upload via WordPress media library
+* Interactive flipbook powered by PageFlipOpen
+* Toolbar, fullscreen, download, single page mode, flip duration, start page, and height controls
+* Wide and full alignment support
+* PDF thumbnail preview in the block editor
 
-== Credits ==
+== Upgrade Notice ==
 
-This plugin incorporates the **pdf-flipbook** library by **HiIamChaitanya**. You can view the project and its contributors here: https://github.com/HiIamChaitanya/pdf-flipbook.
-
-== Future Plans ==
-
-Planned features include additional customization options for the flipbook, such as controlling page navigation, zoom, and other visual elements.
+= 1.0.0 =
+Initial release.
