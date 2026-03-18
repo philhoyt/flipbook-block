@@ -5,7 +5,9 @@
  * Requires at least: 6.6
  * Requires PHP:      7.0
  * Version:           1.0.0
- * Author:            Phil Hoyt
+ * Author:            philhoyt
+ * Author URI:        https://philhoyt.com
+ * GitHub Plugin URI: https://github.com/philhoyt/flipbook-block
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       flipbook-block
