@@ -11,6 +11,7 @@ A WordPress block that displays a PDF as an interactive digital flipbook powered
 - Adjustable flip animation duration and start page
 - Wide and full alignment support
 - PDF thumbnail preview in the block editor
+- Block binding support — `pdfUrl` works with `core/post-meta` (WordPress 6.9+)
 
 ## Requirements
 
@@ -44,6 +45,18 @@ A WordPress block that displays a PDF as an interactive digital flipbook powered
 | Single page mode | Off | Force single-page layout instead of auto-detecting |
 | Flip duration | 800ms | Page-turn animation speed in milliseconds |
 | Start page | 1 | The page number to open on |
+
+## Block Bindings
+
+The `pdfUrl` attribute supports [WordPress block bindings](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-bindings/) (requires WordPress 6.9+). This allows the PDF URL to be sourced dynamically from post meta rather than stored directly in the block.
+
+Example binding declaration in a block template:
+
+```html
+<!-- wp:ph/flipbook-block {"metadata":{"bindings":{"pdfUrl":{"source":"core/post-meta","args":{"key":"your_meta_key"}}}}} /-->
+```
+
+The [Flipbook Catalog](https://github.com/philhoyt/flipbook-catalog) plugin uses this feature to create a configurable PDF catalog content type with a pre-wired block template.
 
 ## Development
 
