@@ -4,7 +4,7 @@
  * Description:       Display a pdf in a digital flipbook format.
  * Requires at least: 6.6
  * Requires PHP:      7.0
- * Version:           1.0.4
+ * Version:           1.1.0
  * Author:            philhoyt
  * Author URI:        https://philhoyt.com
  * GitHub Plugin URI: https://github.com/philhoyt/flipbook-block

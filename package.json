@@ -1,6 +1,6 @@
 {
 	"name": "flipbook-block",
-	"version": "1.0.4",
+	"version": "1.1.0",
 	"description": "A WordPress block that displays a PDF as an interactive digital flipbook.",
 	"author": "philhoyt",
 	"license": "GPL-2.0-or-later",
