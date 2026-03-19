@@ -12,7 +12,6 @@ export default function save( { attributes } ) {
 		singlePageMode,
 		flipDuration,
 		startPage,
-		height,
 	} = attributes;
 
 	return (
@@ -28,7 +27,6 @@ export default function save( { attributes } ) {
 				data-single-page-mode={ singlePageMode }
 				data-flip-duration={ flipDuration }
 				data-start-page={ startPage }
-				style={ { height } }
 			></div>
 		</div>
 	);

@@ -12,7 +12,6 @@ import {
 	ToggleControl,
 	RangeControl,
 	TextControl,
-	__experimentalUnitControl as UnitControl, // eslint-disable-line @wordpress/no-unsafe-wp-apis
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
@@ -33,7 +32,6 @@ const Edit = ( { attributes, setAttributes, clientId } ) => {
 		singlePageMode,
 		flipDuration,
 		startPage,
-		height,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -144,20 +142,6 @@ const Edit = ( { attributes, setAttributes, clientId } ) => {
 						}
 						min={ 1 }
 						max={ 999 }
-					/>
-					<UnitControl
-						label={ __( 'Height', 'flipbook-block' ) }
-						value={ height }
-						onChange={ ( value ) =>
-							setAttributes( { height: value } )
-						}
-						units={ [
-							{ value: 'px', label: 'px' },
-							{ value: 'vh', label: 'vh' },
-							{ value: '%', label: '%' },
-							{ value: 'em', label: 'em' },
-							{ value: 'rem', label: 'rem' },
-						] }
 					/>
 				</PanelBody>
 			</InspectorControls>

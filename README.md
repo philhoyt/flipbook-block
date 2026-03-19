@@ -44,7 +44,6 @@ A WordPress block that displays a PDF as an interactive digital flipbook powered
 | Single page mode | Off | Force single-page layout instead of auto-detecting |
 | Flip duration | 800ms | Page-turn animation speed in milliseconds |
 | Start page | 1 | The page number to open on |
-| Height | 100vh | Height of the flipbook container (px, vh, %, em, rem) |
 
 ## Development
 

@@ -3,7 +3,7 @@ Contributors: philhoyt
 Tags: block, flipbook, pdf, page-flip, viewer
 Requires at least: 6.6
 Tested up to: 6.7
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 Requires PHP: 7.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -48,7 +48,6 @@ Features:
 * Single page mode - Force single-page layout instead of auto-detecting based on container width. Default: off.
 * Flip duration - Page-turn animation speed in milliseconds. Default: 800.
 * Start page - The page number to open on. Default: 1.
-* Height - Height of the flipbook container. Supports px, vh, %, em, and rem. Default: 100vh.
 
 == Frequently Asked Questions ==
 
@@ -66,6 +65,13 @@ Make sure your server is configured to serve .js files with the correct MIME typ
 
 == Changelog ==
 
+= 1.0.2 =
+* Removed manual height control in favour of automatic height via PageFlipOpen's autoHeight option
+* Updated PageFlipOpen to 0.4.3
+
+= 1.0.1 =
+* Internal version bump
+
 = 1.0.0 =
 * Initial release
 * PDF upload via WordPress media library
@@ -75,6 +81,9 @@ Make sure your server is configured to serve .js files with the correct MIME typ
 * PDF thumbnail preview in the block editor
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+The manual height control has been removed. The flipbook now sizes itself automatically.
 
 = 1.0.0 =
 Initial release.

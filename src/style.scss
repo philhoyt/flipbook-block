@@ -1,6 +1,2 @@
-.wp-block-ph-flipbook-block {
-
-	[id^="flipbook-container-"] {
-		min-height: 80vh;
-	}
-}
+// Shared styles loaded in both the editor and on the frontend.
+// Currently empty — PageFlipOpen handles its own layout via autoHeight.

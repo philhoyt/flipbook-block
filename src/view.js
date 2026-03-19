@@ -15,6 +15,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 			const options = {
 				source: pdfUrl,
 				backgroundColor: 'transparent',
+				autoHeight: true,
 				toolbar: dataset.toolbar !== 'false',
 				toolbarAlwaysVisible: dataset.toolbarAlwaysVisible === 'true',
 				enableFullscreen: dataset.enableFullscreen !== 'false',
