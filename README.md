@@ -8,7 +8,7 @@ A WordPress block that displays a PDF as an interactive digital flipbook powered
 - Interactive page-flip animation
 - Configurable toolbar with fullscreen and download options
 - Single page or double page spread layout
-- Adjustable height, flip animation duration, and start page
+- Adjustable flip animation duration and start page
 - Wide and full alignment support
 - PDF thumbnail preview in the block editor
 

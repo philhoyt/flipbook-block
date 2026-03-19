@@ -3,7 +3,7 @@ Contributors: philhoyt
 Tags: block, flipbook, pdf, page-flip, viewer
 Requires at least: 6.6
 Tested up to: 6.7
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 7.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -22,7 +22,7 @@ Features:
 * Interactive page-flip animations
 * Configurable toolbar with fullscreen and download options
 * Auto-detects single or double page spread based on container width
-* Adjustable height, animation speed, and start page
+* Adjustable animation speed and start page
 * Wide and full alignment support
 * PDF thumbnail preview in the block editor
 
@@ -65,6 +65,10 @@ Make sure your server is configured to serve .js files with the correct MIME typ
 
 == Changelog ==
 
+= 1.0.3 =
+* Switch to server-side rendering via render.php
+* pdfUrl attribute is now a plain stored value, enabling block bindings (e.g. core/post-meta)
+
 = 1.0.2 =
 * Removed manual height control in favour of automatic height via PageFlipOpen's autoHeight option
 * Updated PageFlipOpen to 0.4.3
@@ -81,6 +85,9 @@ Make sure your server is configured to serve .js files with the correct MIME typ
 * PDF thumbnail preview in the block editor
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+Switched to server-side rendering. Resave any existing Flipbook blocks to update stored post content.
 
 = 1.0.2 =
 The manual height control has been removed. The flipbook now sizes itself automatically.

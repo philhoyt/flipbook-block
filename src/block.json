@@ -2,16 +2,13 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "ph/flipbook-block",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "title": "Flipbook Block",
     "category": "widgets",
     "icon": "book",
     "attributes": {
         "pdfUrl": {
-            "type": "string",
-            "source": "attribute",
-            "selector": "div[data-pdf-url]",
-            "attribute": "data-pdf-url"
+            "type": "string"
         },
         "blockId": {
             "type": "string"
@@ -56,6 +53,7 @@
         "html": false,
         "align": [ "wide", "full" ]
     },
+    "render": "file:./render.php",
     "textdomain": "flipbook-block",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
