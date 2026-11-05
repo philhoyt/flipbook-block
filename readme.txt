@@ -3,7 +3,7 @@ Contributors: philhoyt
 Tags: block, flipbook, pdf, page-flip, viewer
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 7.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -79,6 +79,14 @@ Make sure your server is configured to serve .js files with the correct MIME typ
 Block binding requires WordPress 6.9 or higher. On earlier versions the binding is silently skipped. Also confirm the meta key you are binding to is registered with `show_in_rest: true` and that the current post has a value saved for that key.
 
 == Changelog ==
+
+= 1.1.1 =
+* Fix: the block output code now runs in its own scope, so its working variables no longer leak into the page template or collide with other code.
+* Change: updates are delivered through GitHub releases.
+* Change: Tested up to WordPress 7.1.
+
+= 1.1.0 =
+* Fix: resolved the WordPress Plugin Check warnings in the block output. The render template now blocks direct file access, uses plugin-prefixed variable names, and marks the already-escaped wrapper attributes for the output escaping check.
 
 = 1.0.4 =
 * Added `"usesContext": ["postId", "postType"]` to `block.json` — required for `core/post-meta` block binding to resolve the correct post's meta value.
