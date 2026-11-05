@@ -1,5 +1,7 @@
 # Flipbook Block
 
+[![CI](https://github.com/philhoyt/flipbook-block/actions/workflows/ci.yml/badge.svg)](https://github.com/philhoyt/flipbook-block/actions/workflows/ci.yml)
+
 A WordPress block that displays a PDF as an interactive digital flipbook powered by [PageFlipOpen](https://github.com/philhoyt/PageFlipOpen).
 
 ## Features
