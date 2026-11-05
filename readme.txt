@@ -2,7 +2,7 @@
 Contributors: philhoyt
 Tags: block, flipbook, pdf, page-flip, viewer
 Requires at least: 6.6
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 1.1.0
 Requires PHP: 7.0
 License: GPL-2.0-or-later
