@@ -1,5 +1,5 @@
 import PageFlipOpen from 'pageflipopen';
-import 'pageflipopen/pageflipopen.css'; // eslint-disable-line import/no-unresolved
+import 'pageflipopen/pageflipopen.css';
 
 document.addEventListener( 'DOMContentLoaded', function () {
 	document
