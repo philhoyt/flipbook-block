@@ -8,96 +8,77 @@ Requires PHP: 7.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Display a PDF as an interactive digital flipbook using the WordPress block editor.
+Displays a PDF from the media library as a page-flip flipbook block
 
 == Description ==
 
-Flipbook Block lets you upload any PDF from your media library and display it as a beautiful, interactive digital flipbook with realistic page-turn animations.
+Flipbook Block adds one block to the editor. Pick a PDF from the media library and the block renders it on the front end as a flipbook with page-turn animation. Rendering is done in the browser by the bundled PageFlipOpen library; no external service is called.
 
-Powered by PageFlipOpen, the flipbook renders entirely in the browser with no external services required.
+The block shows the PDF's thumbnail in the editor when WordPress has generated one. It supports wide and full alignment.
 
-Features:
+Settings in the block sidebar:
 
-* Upload PDFs directly from the WordPress media library
-* Interactive page-flip animations
-* Configurable toolbar with fullscreen and download options
-* Auto-detects single or double page spread based on container width
-* Adjustable animation speed and start page
-* Wide and full alignment support
-* PDF thumbnail preview in the block editor
-* Block binding support — works with `core/post-meta` for use with plugins like [Flipbook Catalog](https://github.com/philhoyt/flipbook-catalog)
+* Show toolbar (default on).
+* Always visible: keep the toolbar on screen instead of fading it out (default on).
+* Fullscreen button in the toolbar (default on).
+* Download button in the toolbar (default off), with an optional filename for the downloaded file.
+* Single page mode: force one page per spread instead of switching between one and two pages based on container width (default off).
+* Flip duration in milliseconds (default 800).
+* Start page (default 1).
 
-== Installation ==
-
-1. Upload the flipbook-block folder to the /wp-content/plugins/ directory, or install the plugin through the WordPress Plugins screen.
-2. Activate the plugin through the Plugins menu in WordPress.
-3. In the block editor, add the Flipbook Block to any post or page.
-4. Upload or select a PDF from your media library.
-
-== Block Settings ==
-
-= Toolbar =
-* Show toolbar - Display the flipbook toolbar. Default: on.
-* Always visible - Keep the toolbar permanently visible instead of fading out. Default: on.
-
-= Features =
-* Fullscreen button - Show a fullscreen toggle button in the toolbar. Default: on.
-* Download button - Show a download button in the toolbar. Default: off.
-* Download filename - Custom filename for the downloaded PDF (only shown when download is enabled).
-
-= Display =
-* Single page mode - Force single-page layout instead of auto-detecting based on container width. Default: off.
-* Flip duration - Page-turn animation speed in milliseconds. Default: 800.
-* Start page - The page number to open on. Default: 1.
-
-== Block Binding Support ==
-
-The `pdfUrl` attribute supports WordPress block bindings (requires WordPress 6.9+). This allows the PDF URL to be sourced dynamically from post meta rather than stored directly in the block.
-
-Example binding declaration in a block template:
+The `pdfUrl` attribute can be bound to post meta through the block bindings API on WordPress 6.9 or later. A template can declare the binding like this:
 
     <!-- wp:ph/flipbook-block {"metadata":{"bindings":{"pdfUrl":{"source":"core/post-meta","args":{"key":"your_meta_key"}}}}} /-->
 
-The [Flipbook Catalog](https://github.com/philhoyt/flipbook-catalog) plugin uses this feature to create a configurable PDF catalog content type with a pre-wired block template.
+The [Flipbook Catalog](https://github.com/philhoyt/flipbook-catalog) plugin uses this binding to build a PDF catalog post type with the block already in its template.
+
+== Installation ==
+
+1. Upload the flipbook-block folder to /wp-content/plugins/, or install the zip from the Plugins screen.
+2. Activate the plugin from the Plugins menu.
+3. In the editor, add the Flipbook Block to a post or page.
+4. Upload or select a PDF from the media library.
+
+Updates are delivered from GitHub releases through Plugin Update Checker.
 
 == Frequently Asked Questions ==
 
 = What file types are supported? =
 
-Only PDF files are supported.
+PDF only.
 
 = Why isn't the PDF thumbnail showing in the editor? =
 
-WordPress generates PDF thumbnails using Imagick. If Imagick is not installed on your server, the thumbnail will not appear in the editor. The flipbook will still work correctly on the frontend.
+WordPress generates PDF thumbnails with Imagick. If Imagick is not installed on the server, there is no thumbnail to show. The flipbook still renders on the front end.
 
 = The flipbook isn't rendering on my site. What should I check? =
 
-Make sure your server is configured to serve .js files with the correct MIME type (application/javascript). If you are seeing a "fake worker" warning in the browser console, this is likely the cause.
+Check that the server sends .js files with the application/javascript MIME type. A "fake worker" warning in the browser console usually points to this.
 
 = I'm using block bindings and the PDF URL is empty. =
 
-Block binding requires WordPress 6.9 or higher. On earlier versions the binding is silently skipped. Also confirm the meta key you are binding to is registered with `show_in_rest: true` and that the current post has a value saved for that key.
+Block bindings need WordPress 6.9 or later; on older versions the binding is skipped. Also confirm the meta key is registered with `show_in_rest: true` and that the post has a value saved for it.
 
 == Changelog ==
 
 = 1.1.1 =
-* Fix: the block output code now runs in its own scope, so its working variables no longer leak into the page template or collide with other code.
-* Change: updates are delivered through GitHub releases.
-* Change: Tested up to WordPress 7.1.
+* Fixed the render template so its working variables stay in their own scope instead of leaking into the page template.
+* Changed update delivery to GitHub releases.
+* Tested up to WordPress 7.1.
 
 = 1.1.0 =
-* Fix: resolved the WordPress Plugin Check warnings in the block output. The render template now blocks direct file access, uses plugin-prefixed variable names, and marks the already-escaped wrapper attributes for the output escaping check.
+* Fixed the Plugin Check warnings in the render template: blocked direct file access, prefixed variable names, and marked the already-escaped wrapper attributes for the escaping check.
 
 = 1.0.4 =
-* Added `"usesContext": ["postId", "postType"]` to `block.json` — required for `core/post-meta` block binding to resolve the correct post's meta value.
-* Registered `pdfUrl` via the `block_bindings_supported_attributes_ph/flipbook-block` filter — required for WordPress 6.9+'s block binding opt-in allowlist.
+* Added `"usesContext": ["postId", "postType"]` to block.json so a `core/post-meta` binding resolves the correct post.
+* Registered `pdfUrl` through the `block_bindings_supported_attributes_ph/flipbook-block` filter, which WordPress 6.9 requires for custom block bindings.
 
 = 1.0.3 =
-* Switch to server-side rendering via render.php.
-* pdfUrl attribute is now a plain stored value, enabling block bindings (e.g. core/post-meta).
+* Switched to server-side rendering through render.php.
+* Stored `pdfUrl` as a plain attribute value so it can be bound to post meta.
 
 = 1.0.2 =
-* Removed manual height control in favour of automatic height via PageFlipOpen's autoHeight option.
+* Removed the manual height control; the flipbook now uses PageFlipOpen's autoHeight option.
 * Updated PageFlipOpen to 0.4.3.
 
 = 1.0.1 =
@@ -105,11 +86,11 @@ Block binding requires WordPress 6.9 or higher. On earlier versions the binding 
 
 = 1.0.0 =
 * Initial release.
-* PDF upload via WordPress media library.
-* Interactive flipbook powered by PageFlipOpen.
-* Toolbar, fullscreen, download, single page mode, flip duration, start page, and height controls.
-* Wide and full alignment support.
-* PDF thumbnail preview in the block editor.
+* Added PDF selection from the media library.
+* Added the PageFlipOpen flipbook view.
+* Added toolbar, fullscreen, download, single page mode, flip duration, start page, and height controls.
+* Added wide and full alignment.
+* Added the PDF thumbnail preview in the editor.
 
 == Upgrade Notice ==
 
