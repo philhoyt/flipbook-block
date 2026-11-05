@@ -4,6 +4,9 @@
 
     <file>flipbook-block.php</file>
 
+    <!-- Exclude bundled libraries. -->
+    <exclude-pattern>/lib/*</exclude-pattern>
+
     <arg name="basepath" value="."/>
     <arg name="colors"/>
     <arg value="sp"/>

@@ -15,6 +15,6 @@ paths:
 - Text domain: `flipbook-block`
 - PHP minimum: 7.0
 - WP minimum: 6.6
-- Distribution: GitHub (no release workflow)
+- Distribution: GitHub (release workflow + Plugin Update Checker)
 - Main file: `flipbook-block.php`
 - Version constant: none (version in plugin header only)
